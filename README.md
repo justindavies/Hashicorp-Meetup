@@ -59,6 +59,12 @@ For now, we need to use the Azure Portal to deploy an AKS cluster as we want to 
 
 Follow the instructions [here](https://docs.microsoft.com/en-us/azure/aks/networking-overview) to configure this.
 
+## Get AKS kubeconfig
+
+```bash
+az aks get-credentials --resource-group hashi-aks --name hashiaks
+```
+
 # Setup Brigade
 
 ```bash
