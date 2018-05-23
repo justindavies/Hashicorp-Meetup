@@ -10,8 +10,8 @@ resource "azurerm_cosmosdb_account" "cosmosdb" {
   }
 
   geo_location {
-    location = "${azurerm_resource_group.terraformonazure.location}"
-    priority = 0
+    location          = "${azurerm_resource_group.terraformonazure.location}"
+    failover_priority = 0
   }
 
   tags {
