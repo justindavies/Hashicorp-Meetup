@@ -12,9 +12,9 @@ resource "azurerm_container_group" "aci-iexcompanies" {
     memory = "1.5"
     port   = "80"
 
-    # environment_variables {
-    #   "COSMOSDB" = "mongodb://${azurerm_cosmosdb_account.cosmosdb.name}:${azurerm_cosmosdb_account.cosmosdb.primary_master_key}@${azurerm_cosmosdb_account.cosmosdb.name}.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
-    # }
+    environment_variables {
+      "COSMOSDB" = "mongodb://${azurerm_cosmosdb_account.cosmosdb.name}:${azurerm_cosmosdb_account.cosmosdb.primary_master_key}@${azurerm_cosmosdb_account.cosmosdb.name}.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
+    }
   }
 
   tags {
