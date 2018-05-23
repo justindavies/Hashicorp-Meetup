@@ -41,30 +41,28 @@ events.on("push", (brigadeEvent, project) => {
 })
 
 
-// events.on("after", (brigadeEvent, project) => {
-//     const slackWebhook = project.secrets.slackWebhook
+events.on("after", (brigadeEvent, project) => {
+    const slackWebhook = project.secrets.slackWebhook
 
-//     console.log(" **** AFTER EVENT called")
-//     console.log(brigadeEvent)
-//     console.log(project)
+    console.log(" **** AFTER EVENT called")
+    console.log(brigadeEvent)
+    console.log(project)
 
-//     const slack = new Job("slack-notify", "technosophos/slack-notify:latest", ["/slack-notify"])
-//     slack.env = {
-//         SLACK_WEBHOOK: slackWebhook,
-//         SLACK_USERNAME: "Bob the Builder",
-//         SLACK_TITLE: `Build completed succesfully`,
-//         SLACK_MESSAGE: "This is a message from Brigade"
-//     }
-// })
+    const slack = new Job("slack-notify", "technosophos/slack-notify:latest", ["/slack-notify"])
+    slack.env = {
+        SLACK_WEBHOOK: slackWebhook,
+        SLACK_USERNAME: "Bob the Builder",
+        SLACK_TITLE: `Build completed succesfully`,
+        SLACK_MESSAGE: "This is a message from Brigade"
+    }
+})
 
 events.on("error", () => {
     console.log("error");
-  });
+});
 
-  events.on("after", () => {
-    console.log("after");
-  });
-  
+
+
 events.on("release", (brigadeEvent, project) => {
 
     // The boring stuff
