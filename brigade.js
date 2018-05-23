@@ -28,12 +28,14 @@ events.on("push", (brigadeEvent, project) => {
         "ARM_TENANT_ID": azTenant,
         "ARM_SUBSCRIPTION_ID": azSubscription,
         "ARM_ACCESS_KEY": azStorageKey,
-        "TF_VAR_build_prefix": gitSHA
+        "TF_VAR_build_prefix": String(gitSHA)
     }
 
 
     frontend.tasks = [
         `cd /src/terraform`,
+        `echo $TF_VAR_build_prefix`,
+        `rm -rf /tmp/*`,
         `ls`,
         `/terraform init -backend-config="key=${gitSHA}"`,
         `/terraform apply -auto-approve`
