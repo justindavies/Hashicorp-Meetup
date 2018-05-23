@@ -116,7 +116,7 @@ events.on("error", (brigadeEvent, project) => {
     const azSubscription = project.secrets.azSubscription
     const azStorageKey = project.secrets.azStorageKey
 
-    const gitPayload = JSON.parse(brigadeEvent.payload)
+    const gitPayload = JSON.parse(brigadeEvent.cause.event.payload)
 
     const gitSHA = brigadeEvent.revision.commit.substr(0, 7)
 
