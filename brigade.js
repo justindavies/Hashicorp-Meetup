@@ -46,6 +46,8 @@ events.on("push", (brigadeEvent, project) => {
 
 
 events.on("after", (brigadeEvent, project) => {
+    console.log(brigadeEvent)
+    console.log(project)
     const slackWebhook = project.secrets.slackWebhook
     const gitPayload = JSON.parse(brigadeEvent.payload)
 
@@ -54,7 +56,7 @@ events.on("after", (brigadeEvent, project) => {
         SLACK_WEBHOOK: slackWebhook,
         SLACK_USERNAME: "👷 Bob the Builder",
         SLACK_TITLE: `🎉 Push from ${gitPayload.ref} by @${gitPayload.pusher.name} completed succesfully`,
-        SLACK_MESSAGE: `http://168.61.45.70/#!/build/`
+        SLACK_MESSAGE: `http://168.61.45.70/#!/build/${brigadeEvent.buildID}`
     }
 
     slack.run()
@@ -69,7 +71,7 @@ events.on("error", (brigadeEvent, project) => {
         SLACK_WEBHOOK: slackWebhook,
         SLACK_USERNAME: "👷 Bob the Builder",
         SLACK_TITLE: `💩 Push from ${gitPayload.ref} by @${gitPayload.pusher.name} failed`,
-        SLACK_MESSAGE: `http://168.61.45.70/#!/build/`
+        SLACK_MESSAGE: `http://168.61.45.70/#!/build/${brigadeEvent.buildID}`
     }
 
     slack.run()
