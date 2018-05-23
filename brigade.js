@@ -46,10 +46,10 @@ events.on("push", (brigadeEvent, project) => {
 
 
 events.on("after", (brigadeEvent, project) => {
-    console.log(brigadeEvent)
-    console.log(project)
+    //console.log(brigadeEvent)
+    //console.log(project)
     const slackWebhook = project.secrets.slackWebhook
-    const gitPayload = JSON.parse(brigadeEvent.payload)
+    const gitPayload = JSON.parse(brigadeEvent.cause.event.payload)
 
     const slack = new Job("slack-notify", "technosophos/slack-notify:latest", ["/slack-notify"])
     slack.env = {
