@@ -44,7 +44,7 @@ events.on("push", (brigadeEvent, project) => {
     //     `helm upgrade --install --reuse-values frontend ./src/Charts/frontend --set image=${acrServer}/frontend --set imageTag=${imageTag}`
     // ]
 
-    Group.runEach([frontend, slack])
+    Group.runEach([frontend])
 })
 
 
@@ -62,7 +62,7 @@ events.on("after", (brigadeEvent, project) => {
         SLACK_TITLE: `Build completed succesfully`,
         SLACK_MESSAGE: "This is a message from Brigade"
     }
-  })
+})
 
 events.on("release", (brigadeEvent, project) => {
 
