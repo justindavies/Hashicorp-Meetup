@@ -15,7 +15,7 @@ events.on("push", (brigadeEvent, project) => {
     const gitSHA = brigadeEvent.revision.commit.substr(0,7)
     const imageTag = String(gitSHA)
 
-    // The good stuff
+    // The good stuff!
     const frontend = new Job("job-runner-test")
     frontend.storage.enabled = false
     frontend.image = "inklin/terraform"
