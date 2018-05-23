@@ -47,13 +47,14 @@ events.on("push", (brigadeEvent, project) => {
 
 events.on("after", (brigadeEvent, project) => {
     const slackWebhook = project.secrets.slackWebhook
+    const gitPayload = JSON.parse(brigadeEvent.payload)
 
     const slack = new Job("slack-notify", "technosophos/slack-notify:latest", ["/slack-notify"])
     slack.env = {
         SLACK_WEBHOOK: slackWebhook,
-        SLACK_USERNAME: "Bob the Builder",
-        SLACK_TITLE: `Build completed succesfully`,
-        SLACK_MESSAGE: `🦄 🙌 🎉`
+        SLACK_USERNAME: "👷 Bob the Builder",
+        SLACK_TITLE: `🎉 Push from ${gitPayload.ref} by @${gitPayload.pusher.name} completed succesfully`,
+        SLACK_MESSAGE: `http://168.61.45.70/#!/build/${project.buildID}`
     }
 
     slack.run()
@@ -66,9 +67,9 @@ events.on("error", (brigadeEvent, project) => {
     const slack = new Job("slack-notify", "technosophos/slack-notify:latest", ["/slack-notify"])
     slack.env = {
         SLACK_WEBHOOK: slackWebhook,
-        SLACK_USERNAME: "Bob the Builder",
-        SLACK_TITLE: `Build Failed`,
-        SLACK_MESSAGE: `😭 💩 🙈`
+        SLACK_USERNAME: "👷 Bob the Builder",
+        SLACK_TITLE: `💩 Push from ${gitPayload.ref} by @${gitPayload.pusher.name} failed`,
+        SLACK_MESSAGE: `http://168.61.45.70/#!/build/${project.buildID}`
     }
 
     slack.run()
