@@ -28,7 +28,9 @@ events.on("push", (brigadeEvent, project) => {
         "ARM_TENANT_ID": azTenant,
         "ARM_SUBSCRIPTION_ID": azSubscription,
         "ARM_ACCESS_KEY": azStorageKey,
-        "TF_VAR_build_prefix": gitSHA
+        "TF_VAR_build_prefix": gitSHA,
+        "TF_VAR_pusher": gitPayload.pusher.name,
+        "TF_VAR_source": gitPayload.ref
     }
 
 
