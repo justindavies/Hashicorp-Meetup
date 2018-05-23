@@ -54,7 +54,10 @@ Retrying role assignment creation: 2/36
   "tenant": "72f988bf-{snip}-2d7cd011db47"
 }
 ```
+# Deploy AKS
+For now, we need to use the Azure Portal to deploy an AKS cluster as we want to make sure it is within a pre-made Virtual Network (VNet).  The reason for this is that we want to be able to back off shared state (i.e. Terraform Backend) onto a private Storage Account.
 
+Follow the instructions [here](https://docs.microsoft.com/en-us/azure/aks/networking-overview) to configure this.
 
 # Setup Brigade
 
