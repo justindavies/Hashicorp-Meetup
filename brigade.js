@@ -19,11 +19,12 @@ events.on("push", (brigadeEvent, project) => {
     frontend.storage.enabled = false
     frontend.image = "inklin/terraform"
     frontend.tasks = [
+        `az login --service-principal -u ${azServicePrincipal} -p ${azClientSecret} --tenant ${azTenant}`,
         `cd /src/terraform`,
         `ls`,
-        `echo ${azServicePrincipal}`,
-        `echo ${azClientSecret}`,
-        `echo ${azTenant}`
+        `/terraform init`,
+        `/terraform apply -auto-approve`
+
     ]
 
     // const frontend_helm = new Job("job-runner-frontend-helm")
