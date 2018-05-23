@@ -8,6 +8,7 @@ events.on("push", (brigadeEvent, project) => {
     const azServicePrincipal = project.secrets.azServicePrincipal
     const azClientSecret = project.secrets.azClientSecret
     const azTenant = project.secrets.azTenant
+    const azSubscription = project.secrets.azSubscription
     const gitPayload = JSON.parse(brigadeEvent.payload)
     const today = new Date()
 
@@ -21,7 +22,8 @@ events.on("push", (brigadeEvent, project) => {
     frontend.env = {
         "ARM_CLIENT_ID": azServicePrincipal,
         "ARM_CLIENT_SECRET": azClientSecret,
-        "ARM_TENANT_ID": azTenant
+        "ARM_TENANT_ID": azTenant,
+        "ARM_SUBSCRIPTION_ID": azSubscription
       }
 
     frontend.tasks = [
