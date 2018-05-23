@@ -1,7 +1,7 @@
 # Hashicorp-Meetup
 Repository to demo Terraform on Azure for Hashicorp Meetup May 2018
 
-## Create Storage account
+## Create Terraform State
 
 For Terraform shared state, create a new resource group for the storage account backend
 
@@ -9,7 +9,7 @@ For Terraform shared state, create a new resource group for the storage account 
 az group create -n hashicorp -l eastus
 ```
 
-### Creatre Storage account
+### Create Storage account
 
 ```bash
 az storage account create -n judastate -g hashicorp
@@ -124,13 +124,14 @@ repository: "github.com/justindavies/Hashicorp-Meetup"
 cloneURL: "https://github.com/justindavies/Hashicorp-Meetup"
 sharedSecret: "MySuperSecretPassword"
 github:
-    token: "6057c2-{snip}-4e90e"
+    token: "6057c24f-{snip}-f76a4e90e"
 secrets:
-    acrServer: "inklin.azurecr.io"
-    acrName: "inklin"
     azServicePrincipal: "7c52386f-{snip}-e11c75dbd514"
     azClientSecret: "eb835646-{snip}-319bf8d53c83"
     azTenant: "72f988bf-{snip}-2d7cd011db47"
+    azSubscription: "63bb1026-{snip}-8b343eefecb3"
+    azStorageKey: "a37LxZkpl-{snip}-UfZXsNQ=="
+    slackWebhook: "https://hooks.slack.com/services/{snip}"
 ```
 
 
