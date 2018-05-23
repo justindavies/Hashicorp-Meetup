@@ -9,7 +9,7 @@ resource "azurerm_cosmosdb_account" "cosmosdb" {
     consistency_level = "Session"
   }
 
-  failover_policy {
+  geo_location {
     location = "${azurerm_resource_group.terraformonazure.location}"
     priority = 0
   }
