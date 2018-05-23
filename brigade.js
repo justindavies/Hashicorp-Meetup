@@ -27,8 +27,10 @@ events.on("push", (brigadeEvent, project) => {
         "ARM_CLIENT_SECRET": azClientSecret,
         "ARM_TENANT_ID": azTenant,
         "ARM_SUBSCRIPTION_ID": azSubscription,
-        "ARM_ACCESS_KEY": azStorageKey
+        "ARM_ACCESS_KEY": azStorageKey,
+        "TF_VAR_build_prefix": gitSHA
     }
+
 
     frontend.tasks = [
         `cd /src/terraform`,
