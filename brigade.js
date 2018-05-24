@@ -143,4 +143,4 @@ events.on("error", (brigadeEvent, project) => {
 
     frontend.run()
 
-})
+}) 
