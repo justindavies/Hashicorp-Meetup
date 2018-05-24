@@ -133,7 +133,7 @@ events.on("error", (brigadeEvent, project) => {
         "TF_VAR_pusher": gitPayload.pusher.name,
         "TF_VAR_source": gitPayload.ref
     }
-
+ 
 
     frontend.tasks = [
         `cd /tf`,
@@ -143,4 +143,4 @@ events.on("error", (brigadeEvent, project) => {
 
     frontend.run() 
 
-})
+}) 
