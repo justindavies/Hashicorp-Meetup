@@ -39,7 +39,7 @@ events.on("push", (brigadeEvent, project) => {
 })
 
 events.on("release", (brigadeEvent, project) => {
-  console.log("Release called")
+    console.log("Release called")
 })
 
 events.on("after", (brigadeEvent, project) => {
@@ -56,7 +56,7 @@ events.on("after", (brigadeEvent, project) => {
 
     const gitSHA = brigadeEvent.revision.commit.substr(0, 7)
 
-    
+
     const slack = new Job("slack-notify", "technosophos/slack-notify:latest", ["/slack-notify"])
     slack.env = {
         SLACK_WEBHOOK: slackWebhook,
@@ -68,33 +68,33 @@ events.on("after", (brigadeEvent, project) => {
     slack.run()
 
 
-        // Deploy Infra 
-        const frontend = new Job("job-runner-destroy")
-        frontend.storage.enabled = false
-        frontend.image = "inklin/terraform"
-    
-        frontend.env = {
-            "ARM_CLIENT_ID": azServicePrincipal,
-            "ARM_CLIENT_SECRET": azClientSecret,
-            "ARM_TENANT_ID": azTenant,
-            "ARM_SUBSCRIPTION_ID": azSubscription,
-            "ARM_ACCESS_KEY": azStorageKey,
-            "TF_VAR_build_prefix": gitSHA,
-            "TF_VAR_pusher": gitPayload.pusher.name,
-            "TF_VAR_source": gitPayload.ref
-        }
-    
-    
-        frontend.tasks = [
-            `cd /src/terraform`,
-            `/terraform init -backend-config="key=${gitSHA}"`,
-            `/terraform destroy -auto-approve`
-        ]
-    
-        frontend.run()
+    // Deploy Infra 
+    const frontend = new Job("job-runner-destroy")
+    frontend.storage.enabled = false
+    frontend.image = "inklin/terraform"
+
+    frontend.env = {
+        "ARM_CLIENT_ID": azServicePrincipal,
+        "ARM_CLIENT_SECRET": azClientSecret,
+        "ARM_TENANT_ID": azTenant,
+        "ARM_SUBSCRIPTION_ID": azSubscription,
+        "ARM_ACCESS_KEY": azStorageKey,
+        "TF_VAR_build_prefix": gitSHA,
+        "TF_VAR_pusher": gitPayload.pusher.name,
+        "TF_VAR_source": gitPayload.ref
+    }
+
+
+    frontend.tasks = [
+        `cd /src/terraform`,
+        `/terraform init -backend-config="key=${gitSHA}"`,
+        `/terraform destroy -auto-approve`
+    ]
+
+    frontend.run()
 })
 
-events.on("error", (brigadeEvent, project) => {
+events.on("error", (brigadeEvent, project) => { 
     const slackWebhook = project.secrets.slackWebhook
     // The boring stuff
     const azServicePrincipal = project.secrets.azServicePrincipal
