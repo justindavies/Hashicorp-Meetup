@@ -11,11 +11,11 @@ events.on("push", (brigadeEvent, project) => {
     const gitPayload = JSON.parse(brigadeEvent.payload)
     const gitSHA = brigadeEvent.revision.commit.substr(0, 7)
 
-
+ 
     // Deploy Infra 
     const frontend = new Job("job-runner-test")
     frontend.storage.enabled = false
-    frontend.image = "inklin/terraform"
+    frontend.image = "inklin/terraform_build:latest"
 
     frontend.env = {
         "ARM_CLIENT_ID": azServicePrincipal,
@@ -30,7 +30,7 @@ events.on("push", (brigadeEvent, project) => {
 
 
     frontend.tasks = [
-        `cd /src/terraform`,
+        `cd /tf`,
         `/terraform init -backend-config="key=${gitSHA}"`,
         `/terraform apply -auto-approve`
     ]
@@ -42,7 +42,7 @@ events.on("push", (brigadeEvent, project) => {
 events.on("release", (brigadeEvent, project) => {
     console.log("Release called")
 })
-
+ 
 events.on("after", (brigadeEvent, project) => {
 
     const slackWebhook = project.secrets.slackWebhook
@@ -52,7 +52,7 @@ events.on("after", (brigadeEvent, project) => {
     const azTenant = project.secrets.azTenant
     const azSubscription = project.secrets.azSubscription
     const azStorageKey = project.secrets.azStorageKey
-
+ 
     const gitPayload = JSON.parse(brigadeEvent.cause.event.payload)
 
     const gitSHA = brigadeEvent.revision.commit.substr(0, 7)
@@ -72,7 +72,7 @@ events.on("after", (brigadeEvent, project) => {
     // Deploy Infra 
     const frontend = new Job("job-runner-destroy")
     frontend.storage.enabled = false
-    frontend.image = "inklin/terraform"
+    frontend.image = "inklin/terraform_build:latest"
 
     frontend.env = {
         "ARM_CLIENT_ID": azServicePrincipal,
@@ -87,7 +87,7 @@ events.on("after", (brigadeEvent, project) => {
 
 
     frontend.tasks = [
-        `cd /src/terraform`,
+        `cd /tf`,
         `/terraform init -backend-config="key=${gitSHA}"`,
         `/terraform destroy -auto-approve`
     ]
@@ -121,7 +121,7 @@ events.on("error", (brigadeEvent, project) => {
     // Deploy Infra 
     const frontend = new Job("job-runner-destroy")
     frontend.storage.enabled = false
-    frontend.image = "inklin/terraform"
+    frontend.image = "inklin/terraform_build:latest"
 
     frontend.env = {
         "ARM_CLIENT_ID": azServicePrincipal,
@@ -136,11 +136,11 @@ events.on("error", (brigadeEvent, project) => {
 
 
     frontend.tasks = [
-        `cd /src/terraform`,
+        `cd /tf`,
         `/terraform init -backend-config="key=${gitSHA}"`,
         `/terraform destroy -auto-approve`
     ]
 
-    frontend.run()
+    frontend.run() 
 
 })
