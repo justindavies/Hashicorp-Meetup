@@ -30,7 +30,7 @@ events.on("push", (brigadeEvent, project) => {
 
 
     frontend.tasks = [
-        `cd /terraform`,
+        `cd /tf`,
         `/terraform init -backend-config="key=${gitSHA}"`,
         `/terraform apply -auto-approve`
     ]
@@ -87,7 +87,7 @@ events.on("after", (brigadeEvent, project) => {
 
 
     frontend.tasks = [
-        `cd /terraform`,
+        `cd /tf`,
         `/terraform init -backend-config="key=${gitSHA}"`,
         `/terraform destroy -auto-approve`
     ]
@@ -136,11 +136,11 @@ events.on("error", (brigadeEvent, project) => {
 
 
     frontend.tasks = [
-        `cd /terraform`,
+        `cd /tf`,
         `/terraform init -backend-config="key=${gitSHA}"`,
         `/terraform destroy -auto-approve`
     ]
 
-    frontend.run()
+    frontend.run() 
 
 })
