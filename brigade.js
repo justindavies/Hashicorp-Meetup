@@ -11,7 +11,7 @@ events.on("push", (brigadeEvent, project) => {
     const gitPayload = JSON.parse(brigadeEvent.payload)
     const gitSHA = brigadeEvent.revision.commit.substr(0, 7)
 
-
+ 
     // Deploy Infra 
     const frontend = new Job("job-runner-test")
     frontend.storage.enabled = false
