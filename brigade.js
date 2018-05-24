@@ -42,7 +42,7 @@ events.on("push", (brigadeEvent, project) => {
 events.on("release", (brigadeEvent, project) => {
     console.log("Release called")
 })
-
+ 
 events.on("after", (brigadeEvent, project) => {
 
     const slackWebhook = project.secrets.slackWebhook
