@@ -37,7 +37,7 @@ events.on("push", (brigadeEvent, project) => {
 
     Group.runEach([frontend]) 
 })
-
+ 
 
 events.on("release", (brigadeEvent, project) => {
     console.log("Release called")
